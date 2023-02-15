@@ -1,4 +1,4 @@
-package com.victormoreira.models;
+package com.victormoreira.services;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +14,7 @@ public class CarregarDadosCSV {
 				dados++;
 				line = br.readLine();
 			}
-			System.out.println("Foram lidas "+dados+" linhas");
+			System.out.println("Foram lidas "+dados+" linhas do arquivo");
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 	
