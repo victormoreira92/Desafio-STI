@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import com.victormoreira.models.Universidade;
+
 public class CalculoCRTest {
 	
 	@Test
