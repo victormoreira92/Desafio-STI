@@ -12,10 +12,11 @@ public class CarregarDadosCSV {
 	private static String path = "arquivoUniversidade.csv";
 	
 
-	public static void main(String[] args) {
+	public static Universidade carregarDados() {
+		Universidade universidade = new Universidade();
+
 		try(BufferedReader br = new BufferedReader(new FileReader(path))){
 			String line = br.readLine();
-			Universidade universidade = new Universidade();
 			line = br.readLine();
 
 			while(line != null) {
@@ -24,11 +25,12 @@ public class CarregarDadosCSV {
 				line = br.readLine();
 
 			}
-			System.out.print(universidade.getListaAlunos().get(0).getDisciplnasCursadas().size());
-		
+			
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 	
+		}finally {
+			return universidade;
 		}
 	}		
 }
