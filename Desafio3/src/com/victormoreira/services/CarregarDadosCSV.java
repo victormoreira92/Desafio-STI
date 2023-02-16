@@ -24,7 +24,8 @@ public class CarregarDadosCSV {
 				line = br.readLine();
 
 			}
-			System.out.println(universidade.getListaAlunos().get(0).getNotas().size());
+			System.out.println(universidade.getListaAlunos().get(0).getCursos());
+
 			
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());

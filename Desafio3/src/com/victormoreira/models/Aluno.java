@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Aluno {
 	private String matricula;
-	private ArrayList<String> codigoCurso = new ArrayList<String>();
+	private ArrayList<String> disciplinasCursadas = new ArrayList<String>();
 	private ArrayList<Integer> notasCursos = new ArrayList<Integer>();
 	
 	
@@ -17,7 +17,7 @@ public class Aluno {
 	
 	public Aluno(String matricula,String curso, String nota) {
 		this.matricula = matricula;
-		this.codigoCurso.add(curso);
+		this.disciplinasCursadas.add(curso);
 		this.notasCursos.add(Integer.parseInt(nota));
 	}
 	
@@ -34,13 +34,17 @@ public class Aluno {
 		this.notasCursos.add(Integer.parseInt(nota));
 	}
 	
-	public void addCurso(String curso) {
-		this.codigoCurso.add(curso);
+	public void addDisciplina(String curso) {
+		this.disciplinasCursadas.add(curso);
 
 	}
 
 	public List<Integer> getNotas() {
 		return this.notasCursos;
+	}
+	
+	public List<String> getCursos() {
+		return this.disciplinasCursadas;
 	}
 	
 }
