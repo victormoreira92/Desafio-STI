@@ -87,7 +87,7 @@ public class Universidade {
 	}
 
 	public Curso getCursoPorCodigo(String codigo) {
-		for(Curso curso : cursosOferecidos) {
+		for(Curso curso : this.cursosOferecidos) {
 			if(curso.getCurso().equals(codigo)) {
 				return curso;
 			}

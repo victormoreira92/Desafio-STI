@@ -9,11 +9,11 @@ import com.victormoreira.models.Universidade;
 import com.victormoreira.services.CRMedioCurso;
 import com.victormoreira.services.CarregarDadosCSV;
 
-public class CalculoCRCursoTeste {
+public class CRMedioTeste {
 	private Universidade universidade = CarregarDadosCSV.carregarDados();
 
 	@Test
-	public double deveriaRetornarCRMedio68paraCurso4() {
+	public void deveriaRetornarCRMedio68paraCurso4() {
 		Curso curso = universidade.getCursoPorCodigo("4");
 		double crMedio = CRMedioCurso.calcular(curso);
 		

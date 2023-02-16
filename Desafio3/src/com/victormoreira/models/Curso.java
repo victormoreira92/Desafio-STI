@@ -13,7 +13,7 @@ public class Curso{
 	}
 	public Curso(String [] linha) {
 		this.alunosCursantes.add(new Aluno(linha[0], Integer.parseInt(linha[3])));
-		this.curso = linha[3];
+		this.curso = linha[2];
 		this.disciplinasCurso.add(new Disciplina(linha[1], linha[4]));
 	}
 	
