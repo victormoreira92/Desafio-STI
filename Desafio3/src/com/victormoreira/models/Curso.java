@@ -1,5 +1,5 @@
 package com.victormoreira.models;
 
-public class Curso {
-
+public class Curso extends Universidade{
+	private 
 }
