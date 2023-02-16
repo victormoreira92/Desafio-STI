@@ -11,6 +11,10 @@ public class Disciplina {
 		this.cargaHoraria = cargaHoraria;
 		this.curso = curso;
 	}
+	public Disciplina(String disciplina, String cargaHoraria) {
+		this.disciplina = disciplina;
+		this.cargaHoraria = cargaHoraria;
+	}
 	public String getCurso() {
 		return curso;
 	}

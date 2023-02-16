@@ -14,6 +14,10 @@ public class Aluno {
 	public Aluno(){
 		
 	}
+	public Aluno(String matricula, Integer nota) {
+		this.matricula = matricula;
+		this.notasCursos.add(nota);
+	}
 	
 	public Aluno(String matricula, Disciplina disciplina, String nota) {
 		this.matricula = matricula;

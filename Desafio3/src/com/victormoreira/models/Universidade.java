@@ -41,11 +41,11 @@ public class Universidade {
 			}
 		}
 		if(member != null) {
-			cursosOferecidos.get(cursosOferecidos.indexOf(member)).addDisciplinasCurso(lineFormatada[1]);
-			cursosOferecidos.get(cursosOferecidos.indexOf(member)).setCargaHoraria(lineFormatada[4]);
+			cursosOferecidos.get(cursosOferecidos.indexOf(member)).addAlunosCursantes(lineFormatada);;
+			cursosOferecidos.get(cursosOferecidos.indexOf(member)).addDisciplinasCurso(lineFormatada);;
 
 		}else {
-			cursosOferecidos.add(new Curso(lineFormatada[1],lineFormatada[2],lineFormatada[4]));
+			cursosOferecidos.add(new Curso(lineFormatada));
 		}
 	}
 	

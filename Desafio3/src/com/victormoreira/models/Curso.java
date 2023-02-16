@@ -5,22 +5,22 @@ import java.util.List;
 
 public class Curso{
 	private String curso;
-	private ArrayList<String> disciplinasCurso = new ArrayList<String>();
-	private ArrayList<String> cargaHoraria = new ArrayList<String>();
+	private ArrayList<Disciplina> disciplinasCurso = new ArrayList<Disciplina>();
+	private ArrayList<Aluno> alunosCursantes = new ArrayList<Aluno>();
 	
 	public Curso() {
 		
 	}
-	public Curso(String disciplina,String curso, String cargaHoraria ) {
-		this.cargaHoraria.add(cargaHoraria);
-		this.curso = curso;
-		this.disciplinasCurso.add(disciplina);
+	public Curso(String [] linha) {
+		this.alunosCursantes.add(new Aluno(linha[0], Integer.parseInt(linha[3])));
+		this.curso = linha[3];
+		this.disciplinasCurso.add(new Disciplina(linha[1], linha[4]));
 	}
 	
 	
 	
-	public void addDisciplinasCurso(String disciplinaCod) {
-		this.disciplinasCurso.add(disciplinaCod);
+	public void addDisciplinasCurso(String[] linha) {
+		this.disciplinasCurso.add(new Disciplina(linha[1], linha[4]));
 	}
 
 	public String getCurso() {
@@ -31,15 +31,15 @@ public class Curso{
 		this.curso = curso;
 	}
 
-	public List<String> getCargaHoraria() {
-		return this.cargaHoraria;
+	public List<Aluno> getAlunosCursantes() {
+		return this.alunosCursantes;
 	}
 
-	public void setCargaHoraria(String cargaHoraria) {
-		this.cargaHoraria.add(cargaHoraria);
+	public void addAlunosCursantes(String[] linha) {
+		this.alunosCursantes.add(new Aluno(linha[0], Integer.parseInt(linha[3])));
 	}
 	
-	public List<String> getdisciplinasCurso(){
+	public List<Disciplina> getdisciplinasCurso(){
 		return this.disciplinasCurso;
 	}
 	
