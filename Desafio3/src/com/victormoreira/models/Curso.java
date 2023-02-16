@@ -3,24 +3,24 @@ package com.victormoreira.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Curso extends Universidade{
+public class Curso{
 	private String curso;
-	private ArrayList<String> matriculasCurso = new ArrayList<String>();
-	private Integer cargaHoraria;
+	private ArrayList<String> disciplinasCurso = new ArrayList<String>();
+	private ArrayList<String> cargaHoraria = new ArrayList<String>();
 	
 	public Curso() {
 		
 	}
-	public Curso(String matricula,String curso, String cargaHoraria ) {
-		this.cargaHoraria = Integer.parseInt(cargaHoraria);
+	public Curso(String disciplina,String curso, String cargaHoraria ) {
+		this.cargaHoraria.add(cargaHoraria);
 		this.curso = curso;
-		this.matriculasCurso.add(matricula);
+		this.disciplinasCurso.add(disciplina);
 	}
 	
 	
 	
-	public void addMatriculaNoCurso(String matricula) {
-		this.matriculasCurso.add(matricula);
+	public void addDisciplinasCurso(String disciplinaCod) {
+		this.disciplinasCurso.add(disciplinaCod);
 	}
 
 	public String getCurso() {
@@ -31,16 +31,16 @@ public class Curso extends Universidade{
 		this.curso = curso;
 	}
 
-	public Integer getCargaHoraria() {
-		return cargaHoraria;
+	public List<String> getCargaHoraria() {
+		return this.cargaHoraria;
 	}
 
-	public void setCargaHoraria(Integer cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
+	public void setCargaHoraria(String cargaHoraria) {
+		this.cargaHoraria.add(cargaHoraria);
 	}
 	
-	public List<String> getMatriculasNoCurso(){
-		return this.matriculasCurso;
+	public List<String> getdisciplinasCurso(){
+		return this.disciplinasCurso;
 	}
 	
 }
