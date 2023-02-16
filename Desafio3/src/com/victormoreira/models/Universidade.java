@@ -24,10 +24,11 @@ public class Universidade {
 	public void  criarListaAluno(String[] lineFormatada) {
 		if(listaMatriculados.contains(lineFormatada[0])) {
 			alunosMatriculados.get(alunosMatriculados.size()-1).addNota(lineFormatada[3]);	
-			alunosMatriculados.get(alunosMatriculados.size()-1).addDisciplina(new Disciplina(lineFormatada[1], lineFormatada[4]));		
+			alunosMatriculados.get(alunosMatriculados.size()-1)
+			.addDisciplina(new Disciplina(lineFormatada[1], lineFormatada[4],lineFormatada[2]));		
 
 		}else {
-			alunosMatriculados.add(new Aluno(lineFormatada[0],new Disciplina(lineFormatada[1], lineFormatada[4]), lineFormatada[3]));
+			alunosMatriculados.add(new Aluno(lineFormatada[0],new Disciplina(lineFormatada[1], lineFormatada[4],lineFormatada[2]), lineFormatada[3]));
 			listaMatriculados.add(lineFormatada[0]);
 
 		}
@@ -58,9 +59,10 @@ public class Universidade {
 		if(member != null) {
 			disciplinaOferecidas.get(disciplinaOferecidas.indexOf(member)).setDisciplina(lineFormatada[1]);
 			disciplinaOferecidas.get(disciplinaOferecidas.indexOf(member)).setCargaHoraria(lineFormatada[4]);
-
+			disciplinaOferecidas.get(disciplinaOferecidas.indexOf(member)).setCargaHoraria(lineFormatada[2]);
+			
 		}else {
-			cursosOferecidos.add(new Curso(lineFormatada[1],lineFormatada[2],lineFormatada[4]));
+			disciplinaOferecidas.add(new Disciplina(lineFormatada[1],lineFormatada[4],lineFormatada[2]));
 		}
 	}
 	public List<Aluno> getListaAlunos() {
@@ -79,6 +81,15 @@ public class Universidade {
 		for(Aluno aluno : alunosMatriculados) {
 			if(aluno.getMatricula().equals(matricula)) {
 				return aluno;
+			}
+		}
+		return null;
+	}
+
+	public Curso getCursoPorCodigo(String codigo) {
+		for(Curso curso : cursosOferecidos) {
+			if(curso.getCurso().equals(codigo)) {
+				return curso;
 			}
 		}
 		return null;
