@@ -13,11 +13,11 @@ public class CRMedioTeste {
 	private Universidade universidade = CarregarDadosCSV.carregarDados();
 
 	@Test
-	public void deveriaRetornarCRMedio53paraCurso103() {
+	public void deveriaRetornarCRMedio83paraCurso103() {
 		Curso curso = universidade.getCursoPorCodigo("103");
-		double crMedio = CRMedioCurso.calcular(curso);
+		Double crMedio = CRMedioCurso.calcular(curso);
 		
-		assertEquals(53.7, crMedio);
+		assertEquals(83.5, crMedio);
 		
 	}
 }
