@@ -24,8 +24,11 @@ public class CoeficienteRendimento {
 			somaCargaHoraria += cargaHoraria;
 			
 		}
-		
-		return somaCr / somaCargaHoraria;
+		if(somaCr > 0) {
+			return somaCr / somaCargaHoraria;
+		}else {
+			return 0.0;
+		}
 	}
 	
 	public static double calcularPorCurso(Curso curso) {
