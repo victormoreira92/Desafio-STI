@@ -8,13 +8,13 @@ import java.util.List;
 public class Aluno {
 	private String matricula;
 	private ArrayList<Disciplina> disciplinasCursadas = new ArrayList<Disciplina>();
-	private ArrayList<Integer> notasCursos = new ArrayList<Integer>();
+	private ArrayList<String> notasCursos = new ArrayList<String>();
 	
 	
 	public Aluno(){
 		
 	}
-	public Aluno(String matricula, Integer nota) {
+	public Aluno(String matricula, String nota) {
 		this.matricula = matricula;
 		this.notasCursos.add(nota);
 	}
@@ -22,7 +22,7 @@ public class Aluno {
 	public Aluno(String matricula, Disciplina disciplina, String nota) {
 		this.matricula = matricula;
 		this.disciplinasCursadas.add(disciplina);
-		this.notasCursos.add(Integer.parseInt(nota));
+		this.notasCursos.add(nota);
 	}
 	
 	public void setMatricula(String matricula) {
@@ -35,7 +35,7 @@ public class Aluno {
 	}
 	
 	public void addNota(String nota) {
-		this.notasCursos.add(Integer.parseInt(nota));
+		this.notasCursos.add(nota);
 	}
 	
 	public void addDisciplina(Disciplina disciplina) {
@@ -43,7 +43,7 @@ public class Aluno {
 
 	}
 
-	public List<Integer> getNotas() {
+	public List<String> getNotas() {
 		return this.notasCursos;
 	}
 	
