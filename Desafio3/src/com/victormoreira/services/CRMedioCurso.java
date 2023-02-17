@@ -12,7 +12,7 @@ public class CRMedioCurso {
 
 	public static double calcular(Curso curso) {
 		Integer cargaHoraria = 0;
-		List<Integer> crAluno = new ArrayList<Integer>();
+		List<Double> crAluno = new ArrayList<Double>();
 		Integer somaCr = 0;
 		Integer somaCargaHoraria = 0;
 		Integer notaAluno = 0;
@@ -20,28 +20,10 @@ public class CRMedioCurso {
 		String matriculaAtual;
 		
 		for(int i = 0; i < curso.getAlunosCursantes().size(); i++ ) {
-			
-			matriculaAtual = curso.getAlunosCursantes().get(i).getMatricula();
-			cargaHoraria = Integer.parseInt(curso.getDisciplinasCurso().get(i).getCargaHoraria());
-			notaAluno = curso.getAlunosCursantes().get(i).getNotas().get(0);
-
-			if(!listaMatricula.contains(matriculaAtual)) {
-				somaCr += cargaHoraria * notaAluno;
-				somaCargaHoraria += cargaHoraria;
-				listaMatricula.add(matriculaAtual);
-			}else {
-				crAluno.add(somaCr/somaCargaHoraria);
-				somaCr = cargaHoraria * notaAluno;
-				somaCargaHoraria = cargaHoraria;
-				listaMatricula.add(matriculaAtual);
-			}
-
+			Aluno aluno = curso.getAlunosCursantes().get(i);
+			crAluno.add(CoeficienteRendimento.calcular(aluno));	
 		}
-		somaNotas = 0;
-		for(Integer numero: crAluno) {
-			somaNotas += numero;
-		}
-
+		somaNotas = 1;
 		return somaNotas /curso.getAlunosCursantes().size();
 	}
 
