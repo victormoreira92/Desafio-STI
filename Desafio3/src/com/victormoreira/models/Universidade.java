@@ -8,6 +8,7 @@ public class Universidade {
 	private ArrayList<Aluno> alunosMatriculados = new ArrayList<Aluno>();
 	private ArrayList<Curso> cursosOferecidos = new ArrayList<Curso>();
 	private ArrayList<String> listaMatriculados = new ArrayList<String>();
+	private ArrayList<String> listaMatriculadosCurso = new ArrayList<String>();
 	private ArrayList<Disciplina> disciplinaOferecidas = new ArrayList<Disciplina>();
 	private int length = 0; 
 
@@ -41,9 +42,14 @@ public class Universidade {
 			}
 		}
 		if(member != null) {
-			cursosOferecidos.get(cursosOferecidos.indexOf(member)).addAlunosCursantes(lineFormatada);;
-			cursosOferecidos.get(cursosOferecidos.indexOf(member)).addDisciplinasCurso(lineFormatada);;
-
+			if(member.getAlunoPorMatricula(lineFormatada[0])) {
+				cursosOferecidos.get(cursosOferecidos.indexOf(member)).getAlunosCursantes().get(0).addNota(lineFormatada[3]);
+				Disciplina disciplina = new Disciplina(lineFormatada[1],lineFormatada[4]);
+				
+			}else {
+				cursosOferecidos.get(cursosOferecidos.indexOf(member)).addAlunosCursantes(lineFormatada);
+				cursosOferecidos.get(cursosOferecidos.indexOf(member)).addDisciplinasCurso(lineFormatada);
+			}
 		}else {
 			cursosOferecidos.add(new Curso(lineFormatada));
 		}

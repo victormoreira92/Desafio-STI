@@ -38,11 +38,24 @@ public class Curso{
 	}
 
 	public void addAlunosCursantes(String[] linha) {
-		this.alunosCursantes.add(new Aluno(linha[0], Integer.parseInt(linha[3])));
+		Disciplina disciplina = new Disciplina(linha[1], linha[4]);
+		this.alunosCursantes.add(new Aluno(linha[0],disciplina,linha[3]));
 	}
 	
 	public List<Disciplina> getDisciplinasCurso(){
 		return this.disciplinasCurso;
+	}
+	
+	public boolean getAlunoPorMatricula(String matricula) {
+		for(Aluno aluno : this.alunosCursantes) {
+			if(aluno.getMatricula().equals(matricula)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public void addNotas(String[] lineFormatada) {
+		
 	}
 	
 }
