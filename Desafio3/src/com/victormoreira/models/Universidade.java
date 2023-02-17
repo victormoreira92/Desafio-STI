@@ -36,16 +36,28 @@ public class Universidade {
 	}
 	public void  criarListaCurso(String[] lineFormatada) {
 		Curso member = null;
-		for(Curso curso : cursosOferecidos) {
-			if(curso.getCurso().equals(lineFormatada[2])) {
-				member = curso;
+		int index = 0;
+		int indexAluno = 0;
+		boolean contem = false;
+		
+		for(int i = 0; i < cursosOferecidos.size();i++) {
+			if(cursosOferecidos.get(i).getCurso().equals(lineFormatada[2])) {
+				member = cursosOferecidos.get(i);
+				index = i;
 			}
 		}
+		
 		if(member != null) {
-			if(member.getAlunoPorMatricula(lineFormatada[0])) {
-				cursosOferecidos.get(cursosOferecidos.indexOf(member)).getAlunosCursantes().get(0).addNota(lineFormatada[3]);
-				Disciplina disciplina = new Disciplina(lineFormatada[1],lineFormatada[4]);
-				
+			for(int i = 0; i < member.getAlunosCursantes().size(); i++) {
+				if(member.getAlunosCursantes().get(i).getMatricula().equals(lineFormatada[0])) {
+					indexAluno = i;
+					contem = true; 
+				}
+			}
+			
+			if(contem) {
+				cursosOferecidos.get(index).getAlunosCursantes().get(indexAluno).addDisciplina(new Disciplina(lineFormatada[1], lineFormatada[4]));
+				cursosOferecidos.get(index).getAlunosCursantes().get(indexAluno).addNota(lineFormatada[3]);
 			}else {
 				cursosOferecidos.get(cursosOferecidos.indexOf(member)).addAlunosCursantes(lineFormatada);
 				cursosOferecidos.get(cursosOferecidos.indexOf(member)).addDisciplinasCurso(lineFormatada);
