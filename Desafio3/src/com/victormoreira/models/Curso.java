@@ -12,9 +12,11 @@ public class Curso{
 		
 	}
 	public Curso(String [] linha) {
-		this.alunosCursantes.add(new Aluno(linha[0], Integer.parseInt(linha[3])));
+		Disciplina disciplina = new Disciplina(linha[1], linha[4]);
+		
+		this.alunosCursantes.add(new Aluno(linha[0],disciplina,linha[3]));
 		this.curso = linha[2];
-		this.disciplinasCurso.add(new Disciplina(linha[1], linha[4]));
+		this.disciplinasCurso.add(disciplina);
 	}
 	
 	
