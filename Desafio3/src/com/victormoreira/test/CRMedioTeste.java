@@ -14,7 +14,7 @@ public class CRMedioTeste {
 
 	@Test
 	public void deveriaRetornarCRMedio68paraCurso4() {
-		Curso curso = universidade.getCursoPorCodigo("4");
+		Curso curso = universidade.getCursoPorCodigo("21");
 		double crMedio = CRMedioCurso.calcular(curso);
 		
 		assertEquals(68.0, crMedio);

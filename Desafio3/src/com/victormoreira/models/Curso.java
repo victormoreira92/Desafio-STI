@@ -39,7 +39,7 @@ public class Curso{
 		this.alunosCursantes.add(new Aluno(linha[0], Integer.parseInt(linha[3])));
 	}
 	
-	public List<Disciplina> getdisciplinasCurso(){
+	public List<Disciplina> getDisciplinasCurso(){
 		return this.disciplinasCurso;
 	}
 	
