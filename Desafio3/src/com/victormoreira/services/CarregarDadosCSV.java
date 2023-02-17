@@ -25,7 +25,6 @@ public class CarregarDadosCSV {
 				line = br.readLine();
 
 			}
-			
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 	
