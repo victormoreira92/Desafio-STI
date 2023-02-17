@@ -1,5 +1,6 @@
 package com.victormoreira.services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,23 +13,25 @@ public class CoeficienteRendimento {
 	
 	public static double calcular(Aluno aluno) {
 		Integer cargaHoraria = 0;
-		Integer notaAluno = 0;
-		Integer somaCr = 0;
+		Double notaAluno = 0.0;
+		Double somaCr = 0.0;
 		Integer somaCargaHoraria = 0;
+		DecimalFormat df = new DecimalFormat("#.##");      
+
 		
 		for(int i = 0; i < aluno.getDisciplnasCursadas().size(); i++ ) {
 			cargaHoraria = Integer.parseInt(aluno.getDisciplnasCursadas().get(i).getCargaHoraria());
-			notaAluno = aluno.getNotas().get(i);
+			notaAluno = Double.parseDouble(aluno.getNotas().get(i));
 
-			somaCr += cargaHoraria * notaAluno;
+			somaCr += (cargaHoraria * notaAluno);
 			somaCargaHoraria += cargaHoraria;
-			
+
 		}
 		
-		return somaCr / somaCargaHoraria;
+		return Double.valueOf(somaCr / somaCargaHoraria);
 	}
 	
-	public static double calcularPorCurso(Curso curso) {
+	/*public static double calcularPorCurso(Curso curso) {
 		Integer cargaHoraria = 0;
 		Integer notaAluno = 0;
 		Integer somaCr = 0;
@@ -43,6 +46,6 @@ public class CoeficienteRendimento {
 		}
 		
 		return somaCr / somaCargaHoraria;
-	}
+	}*/
 
 }
