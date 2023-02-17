@@ -19,16 +19,13 @@ public class CoeficienteRendimento {
 		for(int i = 0; i < aluno.getDisciplnasCursadas().size(); i++ ) {
 			cargaHoraria = Integer.parseInt(aluno.getDisciplnasCursadas().get(i).getCargaHoraria());
 			notaAluno = aluno.getNotas().get(i);
-			
+
 			somaCr += cargaHoraria * notaAluno;
 			somaCargaHoraria += cargaHoraria;
 			
 		}
-		if(somaCr > 0) {
-			return somaCr / somaCargaHoraria;
-		}else {
-			return 0.0;
-		}
+		
+		return somaCr / somaCargaHoraria;
 	}
 	
 	public static double calcularPorCurso(Curso curso) {
