@@ -46,13 +46,13 @@ public class Curso{
 		return this.disciplinasCurso;
 	}
 	
-	public boolean getAlunoPorMatricula(String matricula) {
+	public Aluno getAlunoPorMatricula(String matricula) {
 		for(Aluno aluno : this.alunosCursantes) {
 			if(aluno.getMatricula().equals(matricula)) {
-				return true;
+				return aluno;
 			}
 		}
-		return false;
+		return null;
 	}
 	public void addNotas(String[] lineFormatada) {
 		

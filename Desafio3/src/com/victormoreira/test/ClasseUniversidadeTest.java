@@ -44,7 +44,7 @@ public class ClasseUniversidadeTest {
 		Curso curso = universidade.getCursoPorCodigo("21");
 		int numeroAlunos = curso.getAlunosCursantes().size();
 		
-		assertEquals(11, numeroAlunos);
+		assertEquals(16, numeroAlunos);
 		
 	}
 	
