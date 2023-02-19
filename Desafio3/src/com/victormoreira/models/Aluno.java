@@ -4,51 +4,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
-public class Aluno {
-	private String matricula;
-	private ArrayList<Disciplina> disciplinasCursadas = new ArrayList<Disciplina>();
-	private ArrayList<String> notasCursos = new ArrayList<String>();
+public class Aluno extends Universidade {
+	private final String matricula;
+	private ArrayList<String> disciplinasCursadas;
+	private ArrayList<String> notasCursos;
 	
 	
-	public Aluno(){
-		
-	}
-	public Aluno(String matricula, String nota) {
+	public Aluno(String matricula, String codDisciplina, String nota) {
 		this.matricula = matricula;
+		this.disciplinasCursadas.add(codDisciplina);
 		this.notasCursos.add(nota);
 	}
 	
-	public Aluno(String matricula, Disciplina disciplina, String nota) {
-		this.matricula = matricula;
-		this.disciplinasCursadas.add(disciplina);
-		this.notasCursos.add(nota);
-	}
-	
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
-	
-	
-	public String getMatricula() {
-		return this.matricula;
-	}
 	
 	public void addNota(String nota) {
 		this.notasCursos.add(nota);
 	}
 	
-	public void addDisciplina(Disciplina disciplina) {
+	public void addDisciplina(String disciplina) {
 		this.disciplinasCursadas.add(disciplina);
 
 	}
 
-	public List<String> getNotas() {
-		return this.notasCursos;
+	public ArrayList<String> getNotasDoAluno() {
+		return this.notasCursos;		
+
 	}
 	
-	public List<Disciplina> getDisciplnasCursadas() {
+	public ArrayList<String> getDisciplnasCursadas() {
 		return this.disciplinasCursadas;
+	}
+	
+	
+	public String getMatricula() {
+		return this.matricula;
 	}
 	
 }

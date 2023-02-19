@@ -1,117 +1,90 @@
 package com.victormoreira.models;
 
-
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class Universidade {
-	private ArrayList<Aluno> alunosMatriculados = new ArrayList<Aluno>();
-	private ArrayList<Curso> cursosOferecidos = new ArrayList<Curso>();
-	private ArrayList<String> listaMatriculados = new ArrayList<String>();
-	private ArrayList<String> listaMatriculadosCurso = new ArrayList<String>();
-	private ArrayList<Disciplina> disciplinaOferecidas = new ArrayList<Disciplina>();
-	private int length = 0; 
+import com.victormoreira.services.CarregarDadosCSV;
 
-	
+public class Universidade{
+	private  ArrayList<Aluno> alunosMatriculados;
+	private  ArrayList<Curso> cursosOferecidos;
+	private String path = "arquivoUniversidade.csv";
+
 	public Universidade() {
-		
+		try(BufferedReader br = new BufferedReader(new FileReader(path))){
+			String line = br.readLine();
+			Map<String, String> mapaDeDadosDoCSV = CarregarDadosCSV.criarHashMapComCabecalhoDeCSV(line);
+			line = br.readLine();
+			
+			while(line != null) {
+				mapaDeDadosDoCSV =  CarregarDadosCSV.carregarDadosCSVparaMapa(line, mapaDeDadosDoCSV);
+				this.matricularAlunos(mapaDeDadosDoCSV);
+				this.cadastrarCursos(mapaDeDadosDoCSV);
+				line = br.readLine();
+			
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+
 	}
 	
-	public void processarCSV(String[] lineFormatada) {
-		criarListaAluno(lineFormatada);
-		criarListaCurso(lineFormatada);
-	}
-
-	public void  criarListaAluno(String[] lineFormatada) {
-		if(listaMatriculados.contains(lineFormatada[0])) {
-			alunosMatriculados.get(alunosMatriculados.size()-1).addNota(lineFormatada[3]);	
-			alunosMatriculados.get(alunosMatriculados.size()-1)
-			.addDisciplina(new Disciplina(lineFormatada[1], lineFormatada[4],lineFormatada[2]));		
-
-		}else {
-			alunosMatriculados.add(new Aluno(lineFormatada[0],new Disciplina(lineFormatada[1], lineFormatada[4],lineFormatada[2]), lineFormatada[3]));
-			listaMatriculados.add(lineFormatada[0]);
-
-		}
-	}
-	public void  criarListaCurso(String[] lineFormatada) {
-		Curso member = null;
-		int index = 0;
-		int indexAluno = 0;
-		boolean contem = false;
-		
-		for(int i = 0; i < cursosOferecidos.size();i++) {
-			if(cursosOferecidos.get(i).getCurso().equals(lineFormatada[2])) {
-				member = cursosOferecidos.get(i);
+	public void cadastrarCursos(Map<String, String> mapaDeDadosDoCSV) {
+		Integer index = null;
+		for(int i = 0; i < this.cursosOferecidos.size(); i++) {
+			if(this.cursosOferecidos.get(i).getCod_Curso().equals(mapaDeDadosDoCSV.get("COD_CURSO"))) {
 				index = i;
-			}
+			};
 		}
-		
-		if(member != null) {
-			for(int i = 0; i < member.getAlunosCursantes().size(); i++) {
-				if(member.getAlunosCursantes().get(i).getMatricula().equals(lineFormatada[0])) {
-					indexAluno = i;
-					contem = true; 
-				}
-			}
-			
-			if(contem) {
-				cursosOferecidos.get(index).getAlunosCursantes().get(indexAluno).addDisciplina(new Disciplina(lineFormatada[1], lineFormatada[4]));
-				cursosOferecidos.get(index).getAlunosCursantes().get(indexAluno).addNota(lineFormatada[3]);
-			}else {
-				cursosOferecidos.get(cursosOferecidos.indexOf(member)).addAlunosCursantes(lineFormatada);
-				cursosOferecidos.get(cursosOferecidos.indexOf(member)).addDisciplinasCurso(lineFormatada);
-			}
+		if(index != null) {
+			this.cursosOferecidos.get(index).adicionarDisciplinaCargaHoraria(mapaDeDadosDoCSV);
+			this.cursosOferecidos.get(index).adicionarAlunosAlunosAoCurso(mapaDeDadosDoCSV.get("MATRICULA"), mapaDeDadosDoCSV.get("NOTA"),mapaDeDadosDoCSV.get("COD_DISCIPLINA"));
 		}else {
-			cursosOferecidos.add(new Curso(lineFormatada));
+			Curso curso = new Curso(mapaDeDadosDoCSV);
+			this.cursosOferecidos.add(curso);
+		}
+	}
+
+
+	
+	
+	public void  matricularAlunos(Map<String, String> mapaDeDadosDoCSV) {	
+		Integer index = null;
+		for(int i = 0; i < this.alunosMatriculados.size(); i++) {
+			if(this.alunosMatriculados.get(i).getMatricula().equals(mapaDeDadosDoCSV.get("MATRICULA"))) {
+				index = i;
+			};
+		}
+		if(index != null) {
+			this.alunosMatriculados.get(index).addDisciplina(mapaDeDadosDoCSV.get("COD_DISCIPLINA"));
+			this.alunosMatriculados.get(index).addNota(mapaDeDadosDoCSV.get("NOTA"));
+		}else {
+			Aluno aluno = new Aluno(mapaDeDadosDoCSV.get("MATRICULA"),mapaDeDadosDoCSV.get("CARGA_HORARIA"),mapaDeDadosDoCSV.get("NOTA"));
+			this.alunosMatriculados.add(aluno);
 		}
 	}
 	
-	public void criarListaDisciplina(String[] lineFormatada) {
-		Disciplina member = null;
-		for(Disciplina disciplina : disciplinaOferecidas) {
-			if(disciplina.getDisciplina().equals(lineFormatada[1])) {
-				member = disciplina;
-			}
-		}
-		if(member != null) {
-			disciplinaOferecidas.get(disciplinaOferecidas.indexOf(member)).setDisciplina(lineFormatada[1]);
-			disciplinaOferecidas.get(disciplinaOferecidas.indexOf(member)).setCargaHoraria(lineFormatada[4]);
-			disciplinaOferecidas.get(disciplinaOferecidas.indexOf(member)).setCargaHoraria(lineFormatada[2]);
-			
-		}else {
-			disciplinaOferecidas.add(new Disciplina(lineFormatada[1],lineFormatada[4],lineFormatada[2]));
-		}
-	}
-	public List<Aluno> getListaAlunos() {
+
+	public  List<Aluno> getAlunosMatriculados() {
 		return alunosMatriculados;
 	}
 	
-	public List<Curso> getCursosOferecidos() {
-		return this.cursosOferecidos;
+	public  List<Curso> getCursosOferecidos() {
+		return cursosOferecidos;
 	}
 	
-	public List<Disciplina> getDisciplinas() {
-		return this.disciplinaOferecidas;
-	}
-	
-	public Aluno getAlunoPelaMatricula(String matricula) {
-		for(Aluno aluno : alunosMatriculados) {
-			if(aluno.getMatricula().equals(matricula)) {
-				return aluno;
-			}
+	public String encontrarCargaHoraria(String string) {
+		String carga = null;
+		for(int i=0; i < this.getCursosOferecidos().size(); i++) {
+			carga = this.cursosOferecidos.get(i).encontrarCargaHorariaPorCodigoDisciplina(string);
 		}
-		return null;
+		return carga;
 	}
 
-	public Curso getCursoPorCodigo(String codigo) {
-		for(Curso curso : this.cursosOferecidos) {
-			if(curso.getCurso().equals(codigo)) {
-				return curso;
-			}
-		}
-		return null;
-	}
 	
 	
+
 }

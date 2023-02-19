@@ -1,61 +1,109 @@
 package com.victormoreira.models;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
-public class Curso{
-	private String curso;
-	private ArrayList<Disciplina> disciplinasCurso = new ArrayList<Disciplina>();
-	private ArrayList<Aluno> alunosCursantes = new ArrayList<Aluno>();
+public class Curso {
+	private final String cod_Curso;
+	private HashMap<String, String> disciplinaCargaHoraria;
+	private ArrayList<Aluno> alunosCursantes;
 	
-	public Curso() {
-		
-	}
-	public Curso(String [] linha) {
-		Disciplina disciplina = new Disciplina(linha[1], linha[4]);
-		
-		this.alunosCursantes.add(new Aluno(linha[0],disciplina,linha[3]));
-		this.curso = linha[2];
-		this.disciplinasCurso.add(disciplina);
+	
+	public Curso(String cod_Curso, String matricula, String disciplina, String cargaHoraria, String nota ) {
+		this.cod_Curso = cod_Curso;
+		this.alunosCursantes.add(new Aluno(matricula, disciplina, nota));
+		this.disciplinaCargaHoraria.put(disciplina, cargaHoraria);
 	}
 	
 	
 	
-	public void addDisciplinasCurso(String[] linha) {
-		this.disciplinasCurso.add(new Disciplina(linha[1], linha[4]));
+	public Curso(Map<String, String> mapaDeDadosDoCSV) {
+		this.cod_Curso = mapaDeDadosDoCSV.get("COD_CURSO");
+		this.alunosCursantes.add(new Aluno(mapaDeDadosDoCSV.get("MATRICULA"), mapaDeDadosDoCSV.get("COD_DISCIPLINA"), mapaDeDadosDoCSV.get("NOTA")));
+		this.disciplinaCargaHoraria.put(mapaDeDadosDoCSV.get("COD_DISCIPLINA"), mapaDeDadosDoCSV.get("CARGA_HORARIA"));
 	}
 
-	public String getCurso() {
-		return curso;
+
+
+	public void addDisciplinaCargaHoraria(String disciplina, String cargaHoraria) {
+		if(!this.disciplinaCargaHoraria.containsKey(disciplina)) {
+			this.disciplinaCargaHoraria.put(disciplina, cargaHoraria);
+		};
+	}
+	public HashMap<String,String> getDisciplinasCurso(){
+			return this.disciplinaCargaHoraria;
+	}
+	
+	public String getCod_Curso() {
+		return this.cod_Curso;
 	}
 
-	public void setCurso(String curso) {
-		this.curso = curso;
-	}
 
-	public List<Aluno> getAlunosCursantes() {
+	public ArrayList<Aluno> getAlunosCursantes() {
 		return this.alunosCursantes;
 	}
 
-	public void addAlunosCursantes(String[] linha) {
-		Disciplina disciplina = new Disciplina(linha[1], linha[4]);
-		this.alunosCursantes.add(new Aluno(linha[0],disciplina,linha[3]));
-	}
-	
-	public List<Disciplina> getDisciplinasCurso(){
-		return this.disciplinasCurso;
-	}
-	
-	public Aluno getAlunoPorMatricula(String matricula) {
-		for(Aluno aluno : this.alunosCursantes) {
-			if(aluno.getMatricula().equals(matricula)) {
-				return aluno;
+	public void adicionarAlunosAlunosAoCurso(String matricula, String nota, String disciplina) {
+		Integer index = null;
+		for(int i = 0; i < this.alunosCursantes.size(); i++) {
+			if(this.alunosCursantes.get(i).getMatricula().equals(matricula)) {
+				index = i;		
 			}
 		}
-		return null;
+		if(index != null){
+			this.getAlunosCursantes().get(index).addDisciplina(disciplina);
+			this.getAlunosCursantes().get(index).addNota(nota);
+		}else {
+			Aluno aluno = new Aluno(matricula, disciplina, nota);
+			this.alunosCursantes.add(aluno);
+		}
+
 	}
+			
 	public void addNotas(String[] lineFormatada) {
 		
 	}
 	
+	public String getCodCurso() {
+		return cod_Curso;
+	}
+
+	public Aluno encontrarAlunoPorMatricula(String matricula) {
+
+		try {
+			for(Aluno aluno : this.alunosCursantes) {
+				if(aluno.getMatricula().equals(matricula)) {
+					return aluno;
+				}
+			}
+		}catch (Exception e) {
+			System.out.println("Erro: Matricula não encontrada");
+		}
+		return null;
+	}
+	
+	public String encontrarCargaHorariaPorCodigoDisciplina(String Codigo) {
+		try {
+			for(Entry<String, String> disciplinaCarga : this.disciplinaCargaHoraria.entrySet()) {
+				if(disciplinaCarga.getKey().equals(Codigo)) {
+					return disciplinaCarga.getValue();
+				}
+			}
+		}catch (Exception e) {
+			System.out.println("Erro: Codigo não encontrado");
+		}
+		return "";
+	}
+
+
+
+	public void adicionarDisciplinaCargaHoraria(Map<String, String> mapaDeDadosDoCSV) {
+		if(!this.disciplinaCargaHoraria.containsKey(mapaDeDadosDoCSV.get("COD_DISCIPLINA"))) {
+			this.disciplinaCargaHoraria.put(mapaDeDadosDoCSV.get("COD_DISCIPLINA"), mapaDeDadosDoCSV.get("CARGA_HORARIA"));
+		}
+	}
+
+		
 }
