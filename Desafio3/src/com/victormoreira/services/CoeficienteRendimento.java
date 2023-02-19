@@ -7,10 +7,21 @@ import java.util.List;
 
 import com.victormoreira.models.Aluno;
 import com.victormoreira.models.Universidade;
-
+/**
+ * Classe utilitária que calcula o CR do aluno 
+ * *
+ * @author victormoreira
+ 
+ *
+ */
 public class CoeficienteRendimento {
 	
-	
+	/**
+	 * Calcula o CR do Aluno através de uma referencia de universidade já com os dados já carregados 
+	 * 
+	 *  @param Aluno aluno, Universidade universidade
+	 * 	@return BigDecimal
+	 * */
 	public static BigDecimal calcular( Aluno aluno, Universidade universidade) {
 		Integer cargaHoraria = 0;
 		Double notaAluno = 0.0;

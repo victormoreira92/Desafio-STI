@@ -4,25 +4,49 @@ package com.victormoreira.models;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Representa uma universidade com a lista de aluno matriculado, disciplinas ofercidas e os cursos ofertados
+ * @author Victor Moreira
+ * 
+ * */
 public class Universidade{
 	private  ArrayList<Aluno> alunosMatriculados = new ArrayList<Aluno>();
 	private  ArrayList<Disciplina> disciplinaOfercidas = new ArrayList<Disciplina>();
 	private  ArrayList<Curso> cursosOferecidos = new ArrayList<Curso>();
 
+	
 	public Universidade() {
 
 	}
+	/**
+	 * Cadastra os dados da lista de String nos atributos da classe
+	 * @param String[]
+	 * @return void
+	 * */
 	public void cadastrarDados(String[] dados) {
 		this.cadastrarCursos(dados);
 		this.matricularAlunos(dados);
 		this.cadastrarDisciplinas(dados);
 	}
 	
+	
+	/**
+	 * Cria um objeto do tipo Disciplina e adiciona na lista disciplinaOfercidas.
+	 *  @param String[];
+	 * @return void;
+	 * */
 	public void cadastrarDisciplinas(String[] lineFormatada) {
 		Disciplina disciplina = new Disciplina(lineFormatada[1],lineFormatada[4],lineFormatada[1]);
 		this.disciplinaOfercidas.add(disciplina);
 	}
+	
+	
+	/**
+	 * Cria um objeto do tipo Aluno, verifica se no caso a matricula ja foi adicionada na lista 
+	 * e cria o objeto Aluno e adiciona na lista alunosMatriculados. 
+	 * @param String[]
+	 * @return void
+	 * */
 	
 	public void matricularAlunos(String[] lineFormatada) {
 		Integer index = null;
@@ -39,11 +63,18 @@ public class Universidade{
 			this.alunosMatriculados.add(aluno);
 		}		
 	}
+	/**
+	 * Verifica se existe o elemento na lista e cria um objeto do tipo Curso e
+	 *  adiciona na lista cursosOfercidos 
+	 * @param String[]
+	 * @return void
+	 * 
+	 * */
 
 	public  void cadastrarCursos(String[] lineFormatada) {
 		Integer index = null;
 		for(int i = 0; i < this.cursosOferecidos.size(); i++) {
-			if(this.cursosOferecidos.get(i).getCod_Curso().equals(lineFormatada[2])) {
+			if(this.cursosOferecidos.get(i).getCodCurso().equals(lineFormatada[2])) {
 				index = i;
 			}
 		}
@@ -57,15 +88,28 @@ public class Universidade{
 			}
 		
 	}
-
+	
+	/**
+	 * Get Lista de Alunos Matriculados da universidade
+	 * @return List<Aluno>
+	 * */
+	
 	public  List<Aluno> getAlunosMatriculados() {
 		return alunosMatriculados;
 	}
+	/**
+	 * Get Lista de Cursos Ofercidos da universidade
+	 * @return List<Curso>
+	 * */
 	
 	public  List<Curso> getCursosOferecidos() {
 		return cursosOferecidos;
 	}
 	
+	/**
+	 * Get Lista de Disciplina da universidade
+	 * @return List<Disciplina>
+	 * */
 	public  List<Disciplina> getDisciplinas() {
 		return this.disciplinaOfercidas;
 	}

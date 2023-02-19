@@ -1,7 +1,10 @@
 package com.victormoreira.models;
 
 import java.util.Map;
-
+/**
+ * Representa as disciplinas da universidade com seu nome, carga Horaria, e curso que pertence
+ * @author victormoreira
+ * */
 public class Disciplina extends Universidade{
 	private String disciplina;
 	private String cargaHoraria;
@@ -12,26 +15,30 @@ public class Disciplina extends Universidade{
 		this.cargaHoraria = cargaHoraria;
 		this.curso = curso;
 	}
-
+	/**
+	 * Getter que disciplina pertence Curso
+	 * @return String
+	 * */	
 	public String getCurso() {
 		return curso;
 	}
-	
+	/**
+	 * Getter para o codigo da disciplina
+	 * @return String
+	 * */	
 	public String getDisciplina() {
 		return disciplina;
 	}
 	
-	public void setDisciplina(String disciplina) {
-		this.disciplina = disciplina;
-	}
+	/**
+	 * Getter que carga horaria da disciplina
+	 * @return String
+	 * */	
 	
 	public String getCargaHoraria() {
 		return cargaHoraria;
 	}
-	
-	public void setCargaHoraria(String cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
-	}
+
 	
 	
 	

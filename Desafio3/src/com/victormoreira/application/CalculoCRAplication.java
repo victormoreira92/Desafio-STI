@@ -22,7 +22,7 @@ public class CalculoCRAplication {
 		 System.out.println("----------------------------------");
 		 System.out.println("-----Média dos CR dos Cursos ---------");
 		 for(Curso curso: universidade.getCursosOferecidos()) {
-			 System.out.println(curso.getCod_Curso()+"  -   "+CRMedioCurso.calcular(curso, universidade));
+			 System.out.println(curso.getCodCurso()+"  -   "+CRMedioCurso.calcular(curso, universidade));
 		 }
 		 System.out.println("----------------------------------");
 
