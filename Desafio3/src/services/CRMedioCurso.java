@@ -1,4 +1,4 @@
-package com.victormoreira.services;
+package services;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -7,10 +7,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.victormoreira.models.Aluno;
-import com.victormoreira.models.Curso;
-import com.victormoreira.models.Disciplina;
-import com.victormoreira.models.Universidade;
+import models.Aluno;
+import models.Curso;
+import models.Disciplina;
+import models.Universidade;
 /**
  * Classe utilitária que calcula o CR médio de um curso.
  * @author victormoreira

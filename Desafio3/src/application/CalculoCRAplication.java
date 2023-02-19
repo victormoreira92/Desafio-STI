@@ -1,11 +1,11 @@
-package com.victormoreira.application;
+package application;
 
-import com.victormoreira.models.Aluno;
-import com.victormoreira.models.Curso;
-import com.victormoreira.models.Universidade;
-import com.victormoreira.services.CRMedioCurso;
-import com.victormoreira.services.CarregarDadosCSV;
-import com.victormoreira.services.CoeficienteRendimento;
+import models.Aluno;
+import models.Curso;
+import models.Universidade;
+import services.CRMedioCurso;
+import services.CarregarDadosCSV;
+import services.CoeficienteRendimento;
 
 public class CalculoCRAplication {
 

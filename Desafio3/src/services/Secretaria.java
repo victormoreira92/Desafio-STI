@@ -1,11 +1,11 @@
-package com.victormoreira.services;
+package services;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.victormoreira.models.Aluno;
-import com.victormoreira.models.Curso;
-import com.victormoreira.models.Universidade;
+import models.Aluno;
+import models.Curso;
+import models.Universidade;
 /**
  * Classe Utilitária que representa todas as atividade de uma secretaria, 
  * sendo uma comunicação entre as clase

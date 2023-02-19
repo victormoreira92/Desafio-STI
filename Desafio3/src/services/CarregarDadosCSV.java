@@ -1,11 +1,10 @@
-package com.victormoreira.services;
+package services;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-
-import com.victormoreira.models.Aluno;
-import com.victormoreira.models.Universidade;
+import models.Aluno;
+import models.Universidade;
 /**
  * Classe Utilitária que lida com o carregamento 
  * do csv e em passar para a classe Universidade 

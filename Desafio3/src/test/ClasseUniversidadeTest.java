@@ -1,4 +1,4 @@
-package com.victormoreira.test;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.victormoreira.models.Curso;
-import com.victormoreira.models.Universidade;
-import com.victormoreira.services.CRMedioCurso;
-import com.victormoreira.services.CarregarDadosCSV;
-import com.victormoreira.services.Secretaria;
+import models.Curso;
+import models.Universidade;
+import services.CRMedioCurso;
+import services.CarregarDadosCSV;
+import services.Secretaria;
 
 public class ClasseUniversidadeTest {
 	

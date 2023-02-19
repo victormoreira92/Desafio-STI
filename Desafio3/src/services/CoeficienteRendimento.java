@@ -1,12 +1,12 @@
-package com.victormoreira.services;
+package services;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.victormoreira.models.Aluno;
-import com.victormoreira.models.Universidade;
+import models.Aluno;
+import models.Universidade;
 /**
  * Classe utilitária que calcula o CR do aluno 
  * *

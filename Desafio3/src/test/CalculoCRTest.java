@@ -1,4 +1,4 @@
-package com.victormoreira.test;
+package test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,11 +9,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.victormoreira.models.Aluno;
-import com.victormoreira.models.Universidade;
-import com.victormoreira.services.CarregarDadosCSV;
-import com.victormoreira.services.CoeficienteRendimento;
-import com.victormoreira.services.Secretaria;
+import models.Aluno;
+import models.Universidade;
+import services.CarregarDadosCSV;
+import services.CoeficienteRendimento;
+import services.Secretaria;
 
 
 public class CalculoCRTest {
