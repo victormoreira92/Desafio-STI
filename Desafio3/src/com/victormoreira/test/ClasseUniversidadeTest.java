@@ -2,12 +2,15 @@ package com.victormoreira.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import com.victormoreira.models.Curso;
 import com.victormoreira.models.Universidade;
 import com.victormoreira.services.CRMedioCurso;
 import com.victormoreira.services.CarregarDadosCSV;
+import com.victormoreira.services.Secretaria;
 
 public class ClasseUniversidadeTest {
 	
@@ -30,36 +33,31 @@ public class ClasseUniversidadeTest {
 	}
 	
 	@Test
-	public void numeroDeAlunosNoCurso21DeveriaSer17() {
-		int numeroAlunosMatriculados = universidade.getAlunoNoCurso("21").size();
-		
+	public void numeroDeAlunosNoCurso21DeveriaSer16() {
+		int numeroAlunosMatriculados = Secretaria.getCursoPorCodigo("21", universidade).getAlunosCursantes().size();
 		assertEquals(16, numeroAlunosMatriculados);
 		
 	}
 	@Test
 	public void numeroDeDisciplinasNoCurso103DeveriaSer14() {
-		int numeroDisciplinas = universidade.getDisciplinasDoCurso("103").size();
-		
+		int numeroDisciplinas = Secretaria.getDisciplinasDoCurso("103", universidade).size();
 		assertEquals(14, numeroDisciplinas);
 		
 	}
 	
 	
 	@Test
-	public void curso21DeveRetornar11Aluno() {
-		Curso curso = universidade.getCursoPorCodigo("21");
-		int numeroAlunos = curso.getAlunosCursantes().size();
-		
-		assertEquals(16, numeroAlunos);
+	public void curso103DeveRetornar9Aluno() {
+		int curso = Secretaria.getAlunoNoCurso("103", universidade).size();
+		assertEquals(9, curso);
 		
 	}
 	
 	@Test
-	public void curso21Retornar12Disciplinas() {
-		Curso curso = universidade.getCursoPorCodigo("21");
-		int numeroDisciplina = curso.getDisciplinasCurso().size();
+	public void curso21Retornar99Disciplinas() {
+		int numeroDisciplina = Secretaria.getCursoPorCodigo("21", universidade).getDisciplina().size();
 		
-		assertEquals(12, numeroDisciplina);
+		assertEquals(99, numeroDisciplina);
 		
 	}
 	

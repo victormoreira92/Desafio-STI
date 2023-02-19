@@ -2,6 +2,8 @@ package com.victormoreira.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,7 @@ import com.victormoreira.models.Aluno;
 import com.victormoreira.models.Universidade;
 import com.victormoreira.services.CarregarDadosCSV;
 import com.victormoreira.services.CoeficienteRendimento;
+import com.victormoreira.services.Secretaria;
 
 
 public class CalculoCRTest {
@@ -20,28 +23,27 @@ public class CalculoCRTest {
 	
 	@Test
 	public void deveriaAluno100TerCR63() {
-		Aluno aluno = universidade.getAlunoPelaMatricula("100");
-		double cr = CoeficienteRendimento.calcular(aluno);
+		Aluno aluno = Secretaria.getAlunoPorMatricula("100", universidade);
+		BigDecimal cr = CoeficienteRendimento.calcular(aluno, universidade);
 		
-	    assertEquals(63.0, cr, 0);
+	    assertEquals(new BigDecimal("63.33"), cr);
 		
 	}
 	
 	@Test
-	public void deveriaErroQuandoAlunoNaoExiste() {
-		Aluno aluno = universidade.getAlunoPelaMatricula("16");
-		double cr = CoeficienteRendimento.calcular(aluno);
+	public void deveriaRetornarNullQuandoAlunoNaoExiste() {
+		Aluno aluno = Secretaria.getAlunoPorMatricula("16", universidade);
 		
-	    assertEquals(75.0, cr, 0);
+	    assertEquals(null, aluno );
 		
 	}
 	
 	@Test
 	public void deveriaCRterValor59QuandoNoAluno116() {
-		Aluno aluno = universidade.getAlunoPelaMatricula("116");
-		double cr = CoeficienteRendimento.calcular(aluno);
+		Aluno aluno = Secretaria.getAlunoPorMatricula("116", universidade);
+		BigDecimal cr = CoeficienteRendimento.calcular(aluno, universidade);
 		
-	    assertEquals(59.0, cr, 0);
+	    assertEquals(new BigDecimal("59.81"), cr);
 		
 	}
 	

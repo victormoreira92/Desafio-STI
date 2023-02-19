@@ -33,11 +33,6 @@ public class Disciplina extends Universidade{
 		this.cargaHoraria = cargaHoraria;
 	}
 	
-	@Override
-	public void add(Map<String, String> mapaDeDadosDoCSV) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 }

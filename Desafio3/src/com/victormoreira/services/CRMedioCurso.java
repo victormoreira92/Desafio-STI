@@ -1,6 +1,7 @@
 package com.victormoreira.services;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,22 +14,24 @@ import com.victormoreira.models.Universidade;
 
 public class CRMedioCurso {
 
-	public static BigDecimal calcular(Curso curso) {
+	public static BigDecimal calcular(Curso curso, Universidade universidade) {
 
-		ArrayList<Double> listaCRAluno = new ArrayList<Double>();
+		ArrayList<BigDecimal> listaCRAluno = new ArrayList<BigDecimal>();
 		List <String> cargas = new ArrayList<String>();
 		List <String> notass = new ArrayList<String>();
 
 		for(int i = 0; i < curso.getAlunosCursantes().size(); i++ ) {
 			Aluno aluno = curso.getAlunosCursantes().get(i);
-			listaCRAluno.add(CoeficienteRendimento.calcular(aluno));	
+			listaCRAluno.add(CoeficienteRendimento.calcular(aluno, universidade));	
 		}
-		Double somaCR = 0.0;
-		for( Double cr : listaCRAluno) {
-			somaCR += cr;
+		BigDecimal somaCR = BigDecimal.ZERO;
+		for( BigDecimal cr : listaCRAluno) {
+			somaCR = somaCR.add(cr);
 		}
-		
-		return  new BigDecimal(somaCR/curso.getAlunosCursantes().size()).setScale(2, RoundingMode.HALF_DOWN);
+		BigDecimal tamanhoAlunos = new BigDecimal(curso.getAlunosCursantes().size());
+		MathContext mc = new MathContext(2, RoundingMode.HALF_DOWN) ;
+
+		return  somaCR.divide(tamanhoAlunos, RoundingMode.HALF_DOWN);
 	}
 
 }

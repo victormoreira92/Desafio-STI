@@ -16,28 +16,15 @@ public class Curso {
 	public Curso(String cod_Curso, String matricula, String disciplina, String cargaHoraria, String nota ) {
 		this.cod_Curso = cod_Curso;
 		this.alunosCursantes.add(new Aluno(matricula, disciplina, nota));
-		this.disciplina .add(disciplina);
-		this.cargaHoraria .add(cargaHoraria);
+		this.disciplina.add(disciplina);
+		this.cargaHoraria.add(cargaHoraria);
 	}
 	
-	
-	
-	public Curso(Map<String, String> mapaDeDadosDoCSV) {
-		this.cod_Curso = mapaDeDadosDoCSV.get("COD_CURSO");
-		this.alunosCursantes.add(new Aluno(mapaDeDadosDoCSV.get("MATRICULA"), mapaDeDadosDoCSV.get("COD_DISCIPLINA"), mapaDeDadosDoCSV.get("NOTA")));
-		this.disciplinaCargaHoraria.put(mapaDeDadosDoCSV.get("COD_DISCIPLINA"), mapaDeDadosDoCSV.get("CARGA_HORARIA"));
-	}
-
-
-
 	public void addDisciplinaCargaHoraria(String disciplina, String cargaHoraria) {
-		if(!this.disciplinaCargaHoraria.containsKey(disciplina)) {
-			this.disciplinaCargaHoraria.put(disciplina, cargaHoraria);
-		};
+			this.disciplina.add(disciplina);
+			this.cargaHoraria.add(cargaHoraria);
 	}
-	public HashMap<String,String> getDisciplinasCurso(){
-			return this.disciplinaCargaHoraria;
-	}
+	
 	
 	public String getCod_Curso() {
 		return this.cod_Curso;
@@ -87,28 +74,6 @@ public class Curso {
 		return null;
 	}
 	
-	public String encontrarCargaHorariaPorCodigoDisciplina(String Codigo) {
-		try {
-			for(Entry<String, String> disciplinaCarga : this.disciplinaCargaHoraria.entrySet()) {
-				if(disciplinaCarga.getKey().equals(Codigo)) {
-					return disciplinaCarga.getValue();
-				}
-			}
-		}catch (Exception e) {
-			System.out.println("Erro: Codigo não encontrado");
-		}
-		return "";
-	}
-
-
-
-	public void adicionarDisciplinaCargaHoraria(String cod, String carga) {
-		if(!this.disciplinaCargaHoraria.containsKey(cod)) {
-			this.disciplinaCargaHoraria.put(cod, carga);
-		}
-	}
-
-
 
 	public HashMap<String, String> getDisciplinaCargaHoraria() {
 		return disciplinaCargaHoraria;
