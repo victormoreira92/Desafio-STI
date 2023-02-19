@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class Aluno extends Universidade {
 	private final String matricula;
-	private ArrayList<String> disciplinasCursadas;
-	private ArrayList<String> notasCursos;
+	private ArrayList<String> disciplinasCursadas = new ArrayList<String>();
+	private ArrayList<String> notasCursos = new ArrayList<String>();
 	
 	
 	public Aluno(String matricula, String codDisciplina, String nota) {

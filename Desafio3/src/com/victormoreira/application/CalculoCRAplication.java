@@ -1,13 +1,19 @@
 package com.victormoreira.application;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.victormoreira.models.Universidade;
 import com.victormoreira.services.CarregarDadosCSV;
 
 public class CalculoCRAplication {
-	private static Universidade universidade = new Universidade();
 
 	public static void main(String[] args) throws Exception {
-		universidade = CarregarDadosCSV.carregarDados();
+		 Reader fr = new FileReader("arquivoUniversidade.csv");
+         try (BufferedReader br = new BufferedReader(fr)) {
+			System.out.println(br.readLine());
+		}
 	}
 
 }

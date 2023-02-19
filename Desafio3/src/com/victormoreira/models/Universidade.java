@@ -5,34 +5,58 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.victormoreira.services.CarregarDadosCSV;
 
 public class Universidade{
-	private  ArrayList<Aluno> alunosMatriculados;
-	private  ArrayList<Curso> cursosOferecidos;
-	private String path = "arquivoUniversidade.csv";
+	private  ArrayList<Aluno> alunosMatriculados = new ArrayList<Aluno>();
+	private  ArrayList<Curso> cursosOferecidos = new ArrayList<Curso>();
+	private  String path = "arquivoUniversidade.csv";
 
 	public Universidade() {
-		try(BufferedReader br = new BufferedReader(new FileReader(path))){
-			String line = br.readLine();
-			Map<String, String> mapaDeDadosDoCSV = CarregarDadosCSV.criarHashMapComCabecalhoDeCSV(line);
-			line = br.readLine();
-			
-			while(line != null) {
-				mapaDeDadosDoCSV =  CarregarDadosCSV.carregarDadosCSVparaMapa(line, mapaDeDadosDoCSV);
-				this.matricularAlunos(mapaDeDadosDoCSV);
-				this.cadastrarCursos(mapaDeDadosDoCSV);
-				line = br.readLine();
-			
-			}
-		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
-		}
 
 	}
+	public void cadastrarDados(String[] dados) {
+		this.cadastrarCursos(dados);
+		this.matricularAlunos(dados);
+	}
 	
-	public void cadastrarCursos(Map<String, String> mapaDeDadosDoCSV) {
+	private void matricularAlunos(String[] lineFormatada) {
+		Integer index = null;
+		for(int i = 0; i < this.alunosMatriculados.size(); i++) {
+			if(this.alunosMatriculados.get(i).getMatricula().equals(lineFormatada[0])) {
+				index = i;
+			};
+		}
+		if(index != null) {
+			this.alunosMatriculados.get(index).addDisciplina(lineFormatada[1]);
+			this.alunosMatriculados.get(index).addNota(lineFormatada[3]);
+		}else {
+			Aluno aluno = new Aluno(lineFormatada[0],lineFormatada[2],lineFormatada[3]);
+			this.alunosMatriculados.add(aluno);
+		}		
+	}
+
+	private void cadastrarCursos(String[] lineFormatada) {
+		Integer index = null;
+		for(int i = 0; i < this.cursosOferecidos.size(); i++) {
+			if(this.cursosOferecidos.get(i).getCod_Curso().equals(lineFormatada[2])) {
+				index = i;
+			}
+		}
+		
+		if(index != null) {
+				this.cursosOferecidos.get(index).adicionarDisciplinaCargaHoraria(lineFormatada[1], lineFormatada[4]);
+				this.cursosOferecidos.get(index).adicionarAlunosAlunosAoCurso(lineFormatada[0], lineFormatada[1], lineFormatada[3]);
+			}else {
+				Curso curso = new Curso(lineFormatada[2], lineFormatada[0], lineFormatada[1], lineFormatada[4], lineFormatada[3]);
+				this.cursosOferecidos.add(curso);
+			}
+		
+	}
+
+	/*public void cadastrarCursos(Map<String, String> mapaDeDadosDoCSV) {
 		Integer index = null;
 		for(int i = 0; i < this.cursosOferecidos.size(); i++) {
 			if(this.cursosOferecidos.get(i).getCod_Curso().equals(mapaDeDadosDoCSV.get("COD_CURSO"))) {
@@ -46,7 +70,7 @@ public class Universidade{
 			Curso curso = new Curso(mapaDeDadosDoCSV);
 			this.cursosOferecidos.add(curso);
 		}
-	}
+	}*/
 
 
 	
@@ -62,7 +86,7 @@ public class Universidade{
 			this.alunosMatriculados.get(index).addDisciplina(mapaDeDadosDoCSV.get("COD_DISCIPLINA"));
 			this.alunosMatriculados.get(index).addNota(mapaDeDadosDoCSV.get("NOTA"));
 		}else {
-			Aluno aluno = new Aluno(mapaDeDadosDoCSV.get("MATRICULA"),mapaDeDadosDoCSV.get("CARGA_HORARIA"),mapaDeDadosDoCSV.get("NOTA"));
+			Aluno aluno = new Aluno(mapaDeDadosDoCSV.get("MATRICULA"),mapaDeDadosDoCSV.get("COD_DISCIPLINA"),mapaDeDadosDoCSV.get("NOTA"));
 			this.alunosMatriculados.add(aluno);
 		}
 	}
@@ -83,6 +107,25 @@ public class Universidade{
 		}
 		return carga;
 	}
+	public ArrayList<String> getDisciplinasDoCurso(String string) {
+		for(Curso curso : this.cursosOferecidos) {
+			if(curso.getCod_Curso().equals(string)) {
+				return curso.getDisciplina();
+			}
+		}
+		return null;
+	}
+	
+	public List<Aluno> getAlunoNoCurso(String string) {
+		for(Curso curso : this.cursosOferecidos) {
+			if(curso.getCod_Curso().equals(string)) {
+				return curso.getAlunosCursantes();
+			}
+		}
+		return null;
+	}
+
+
 
 	
 	

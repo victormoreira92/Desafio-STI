@@ -17,24 +17,30 @@ public class ClasseUniversidadeTest {
 	@Test
 	public void numeroDeCursosNaUniversidadeDeveSer5() {
 		int numeroDisciplinas = universidade.getCursosOferecidos().size();
-		
 		assertEquals(5, numeroDisciplinas);
 		
 	}
 	
 	@Test
 	public void numeroDeAlunosDaUniversidadeDeveriaSer17() {
-		int numeroAlunosMatriculados = universidade.getListaAlunos().size();
+		int numeroAlunosMatriculados = universidade.getAlunosMatriculados().size();
 		
 		assertEquals(17, numeroAlunosMatriculados);
 		
 	}
 	
 	@Test
-	public void numeroDeDisciplinasNoCurso4DeveriaSer86() {
-		int numeroDisciplinas = universidade.getCursoPorCodigo("4").getDisciplinasCurso().size();
+	public void numeroDeAlunosNoCurso21DeveriaSer17() {
+		int numeroAlunosMatriculados = universidade.getAlunoNoCurso("21").size();
 		
-		assertEquals(86, numeroDisciplinas);
+		assertEquals(16, numeroAlunosMatriculados);
+		
+	}
+	@Test
+	public void numeroDeDisciplinasNoCurso103DeveriaSer14() {
+		int numeroDisciplinas = universidade.getDisciplinasDoCurso("103").size();
+		
+		assertEquals(14, numeroDisciplinas);
 		
 	}
 	

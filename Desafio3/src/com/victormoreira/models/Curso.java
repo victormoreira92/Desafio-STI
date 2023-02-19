@@ -7,14 +7,17 @@ import java.util.Map.Entry;
 
 public class Curso {
 	private final String cod_Curso;
-	private HashMap<String, String> disciplinaCargaHoraria;
-	private ArrayList<Aluno> alunosCursantes;
+	private HashMap<String, String> disciplinaCargaHoraria = new HashMap<String, String>();
+	private ArrayList<Aluno> alunosCursantes = new ArrayList<Aluno>();
+	private ArrayList<String> disciplina = new ArrayList<String>();
+	private ArrayList<String> cargaHoraria = new ArrayList<String>() ;
 	
 	
 	public Curso(String cod_Curso, String matricula, String disciplina, String cargaHoraria, String nota ) {
 		this.cod_Curso = cod_Curso;
 		this.alunosCursantes.add(new Aluno(matricula, disciplina, nota));
-		this.disciplinaCargaHoraria.put(disciplina, cargaHoraria);
+		this.disciplina .add(disciplina);
+		this.cargaHoraria .add(cargaHoraria);
 	}
 	
 	
@@ -99,10 +102,28 @@ public class Curso {
 
 
 
-	public void adicionarDisciplinaCargaHoraria(Map<String, String> mapaDeDadosDoCSV) {
-		if(!this.disciplinaCargaHoraria.containsKey(mapaDeDadosDoCSV.get("COD_DISCIPLINA"))) {
-			this.disciplinaCargaHoraria.put(mapaDeDadosDoCSV.get("COD_DISCIPLINA"), mapaDeDadosDoCSV.get("CARGA_HORARIA"));
+	public void adicionarDisciplinaCargaHoraria(String cod, String carga) {
+		if(!this.disciplinaCargaHoraria.containsKey(cod)) {
+			this.disciplinaCargaHoraria.put(cod, carga);
 		}
+	}
+
+
+
+	public HashMap<String, String> getDisciplinaCargaHoraria() {
+		return disciplinaCargaHoraria;
+	}
+
+
+
+	public ArrayList<String> getDisciplina() {
+		return disciplina;
+	}
+
+
+
+	public ArrayList<String> getCargaHoraria() {
+		return cargaHoraria;
 	}
 
 		
